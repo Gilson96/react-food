@@ -1,23 +1,30 @@
-import logo from './logo.svg';
+import { useState } from 'react'
 import './App.css';
+import Menu from './components/Menu'
+import Dashboard from './components/Dashboard'
+import Checkout from './components/Checkout';
+import CartCheckout from './components/CartCheckout'
+import { useSelector, useDispatch } from 'react-redux'
+import { useDisclosure } from '@chakra-ui/react'
+import { useGetFoodQuery } from './features/apiSlice';
 
 function App() {
+  const items = useSelector((state) => state.cart.cart)
+  const [onToggle, setOnToggle] = useState(false)
+  const { isOpen, onOpen, onClose } = useDisclosure()
+  
+  console.log(items)
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="flex flex-col h-screen w-full gap-12 bg-stone-900 p-3">
+
+      <Menu onToggle={onToggle} setOnToggle={setOnToggle} onOpen={onOpen} />
+
+      {onToggle &&
+        <CartCheckout onClose={onClose} isOpen={isOpen}/>
+      }
+
+      <Dashboard />
     </div>
   );
 }
