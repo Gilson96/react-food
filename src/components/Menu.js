@@ -12,7 +12,7 @@ const Menu = ({setOnToggle, onToggle, onOpen}) => {
     return (
         <div className='flex justify-between  mx-3'>
             <p className='text-yellow-500 text-2xl font-bold'>React Food</p>
-            <p className='text-yellow-500 mt-1' onClick={() => { setOnToggle(!onToggle); onOpen(); }}>Cart({cartLength})</p>
+            <p className='text-yellow-500 mt-1 cursor-pointer' onClick={() => { setOnToggle(!onToggle); onOpen(); }}>Cart({cartLength})</p>
            
         </div>
     )
